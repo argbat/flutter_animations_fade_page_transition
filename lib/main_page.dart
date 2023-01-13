@@ -37,6 +37,8 @@ class _MainPageState extends State<MainPage> {
           children: [..._pages],
         ),
       ),
+      floatingActionButton:
+          FloatingActionButton(onPressed: () => _showDialog(context)),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedPageIdx,
         onTap: (value) {
@@ -61,6 +63,26 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _showDialog(BuildContext context) {
+    return showModal(
+      context: context,
+      configuration: const FadeScaleTransitionConfiguration(
+        transitionDuration: Duration(seconds: 3),
+      ),
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Alert'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Close'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
